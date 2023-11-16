@@ -33,24 +33,25 @@ export default function TextForm(props) {
         props.showAlert("Extra space removed", "success");
 
     }
+    
   return (
     <>
     <div className="container">
-
-    
     <div class="my-3">
         <h4 style={{color: props.mode === 'dark'?'white':'black'}}>{props.heading}</h4>
-    <button className='btn btn-success my-2' onClick={copyOnClick}>Copy</button>
+    <button disabled={text.length===0} className='btn btn-success my-2' onClick={copyOnClick}>Copy</button>
         <textarea className="form-control" value={text} onChange={handleOnChange} rows="8" id="mytext" style={{backgroundColor: props.mode === 'dark'?'black':'white', color: props.mode === 'dark'?'white':'black'}}></textarea>
     </div>
-    <button className='btn btn-primary mx-2' onClick={upperOnClick}>Convert to Uppercase</button>
-    <button className='btn btn-primary mx-2' onClick={lowerOnClick}>Convert to Lowercase</button>
-    <button className='btn btn-warning mx-2' onClick={handleExtraSpace}>Remove Extra Spaces</button>
-    <button className='btn btn-danger' onClick={clearOnClick}>Clear Text</button>
-    <div className="container my-2">
-        <h5 style={{color: props.mode === 'dark'?'white':'black'}}>Text summary</h5>
-        <p style={{color: props.mode === 'dark'?'white':'black'}}>{text.split(" ").length} words, {text.length} characters</p>
-    </div>
+    <button disabled={text.length===0} className='btn btn-primary mx-1 my-1' onClick={upperOnClick}>Convert to Uppercase</button>
+    <button disabled={text.length===0} className='btn btn-primary mx-1 my-1' onClick={lowerOnClick}>Convert to Lowercase</button>
+    <button disabled={text.length===0} className='btn btn-warning mx-1 my-1' onClick={handleExtraSpace}>Remove Extra Spaces</button>
+    <button disabled={text.length===0} className='btn btn-danger mx-1 my-1' onClick={clearOnClick}>Clear Text</button>
+   
+    <h5 className='heading mt-4' style={{color: props.mode === 'dark'?'white':'black'}}>Text summary</h5>
+    <p style={{color: props.mode === 'dark'?'white':'black'}}>{text.split(/\s+/).filter((e)=>{return e.length!==0}).length} words, {text.length} characters</p>
+    
+    <h4 style={{color: props.mode === 'dark'?'white':'black'}}>Preview</h4>
+    <p style={{color: props.mode === 'dark'?'white':'black'}}>{text.length>0?text:'Nothing to preview!'}</p>
     </div>
     </>
   )
